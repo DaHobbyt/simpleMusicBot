@@ -38,7 +38,7 @@ async def start_music_player():
                 else:
                     await voice_client.pause()
                     
-bot.load_extension("cogs.ikiforgot
+bot.load_extension("cogs.music_cog")
 
 bot.is_paused = False
 
