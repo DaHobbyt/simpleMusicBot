@@ -8,7 +8,7 @@ class Music(commands.Cog):
         self.is_playing = False
         self.is_paused = False
 
-    @commands.command()
+    @commands.slash_command(name="join", description="makes the bot join ur voice channel")
     async def join(self, ctx):
         if not ctx.message.author.voice:
             await ctx.send("You are not connected to a voice channel!")
@@ -17,7 +17,7 @@ class Music(commands.Cog):
             channel = ctx.message.author.voice.channel
         await channel.connect()
 
-    @commands.command()
+    @commands.slash_command(name="play", description="plays a song")
     async def play(self, ctx, url):
         server = ctx.message.guild
         voice_channel = server.voice_client
@@ -27,7 +27,7 @@ class Music(commands.Cog):
             voice_channel.play(discord.FFmpegPCMAudio(player['formats'][0]['url']))
             await ctx.send('Playing...')
 
-    @commands.command()
+    @commands.slash_command(name="pause", description="Pauses a song")
     async def pause(self, ctx):
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
@@ -37,7 +37,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("Currently not playing music")
 
-    @commands.command()
+    @commands.slash_command(name="resume", description="resumes the song")
     async def resume(self, ctx):
         voice_client = ctx.message.guild.voice_client
         if self.is_paused:
@@ -47,7 +47,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("Currently not playing music or not paused")
 
-    @commands.command()
+    @commands.slash_command(name="stop", description="stops the bot")
     async def stop(self, ctx):
         voice_client = ctx.message.guild.voice_client
         self.is_playing = False
